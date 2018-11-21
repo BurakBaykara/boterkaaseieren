@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="style.css">
+	<title>Boter, kaas en eieren</title>
+</head>
+<body>
+	<div class ="links">
+		<div id="winnaar"></div>
+		<button onclick = "nieuwSpel()" class="button">start nieuw spel</button>
+	</div>
+	<div class="midden">
+		<table>
+			<tr>
+				<td id="r1k1" onclick = "doeZet(this)"></td>
+				<td id="r1k2" onclick = "doeZet(this)"></td>
+				<td id="r1k3" onclick = "doeZet(this)"></td>
+			</tr>
+			<tr>
+				<td id="r2k1" onclick = "doeZet(this)"></td>
+				<td id="r2k2" onclick = "doeZet(this)"></td>
+				<td id="r2k3" onclick = "doeZet(this)"></td>
+			</tr>
+			<tr>
+				<td id="r3k1" onclick = "doeZet(this)"></td>
+				<td id="r3k2" onclick = "doeZet(this)"></td>
+				<td id="r3k3" onclick = "doeZet(this)"></td>
+			</tr>
+		</table>
+	</div>
+	<div class= "rechts">
+		
+	</div>
+</body>
+<script>
+	var beurt="X";
+	var aantalBeurten=0;	
+	function nieuwSpel() {
+		location.reload();
+		for (var rij=1;rij<=3;rij++){
+			for (var kolom=1;kolom<=3;kolom++) {
+				document.getElementById("r"+rij+ "k" + kolom).innerHTML="";
+				document.getElementById("winnaar").innerHTML="";
+				
+			}
+
+		}
+		beurt="X";
+		aantalBeurten=0;
+	}
+	
+	
+	function doeZet(cel) {
+		if (cel.innerHTML == "") {
+			cel.innerHTML = beurt;
+			aantalBeurten++;
+			bepaalWinnaar();
+			bepaalGelijkSpel();
+			if (!winnaar && !gelijkspel) {
+				beurt = "O";
+				computerzet();
+				aantalBeurten++;
+				bepaalWinnaar();
+				bepaalGelijkSpel();
+				beurt = "X";
+			}
+		}
+
+	}
+	var winnaar=false;
+	
+	function computerzet(){
+		var rij = Math.floor((Math.random() * 3) +1);
+		var kolom =Math.floor((Math.random() *3) +1);
+		var celID = "r" + rij + "k" + kolom;
+		while (document.getElementById(celID).innerHTML != "") {
+			rij = Math.floor((Math.random() *3) +1);
+			kolom = Math.floor((Math.random() *3) +1)
+			celID = "r" + rij + "k" +kolom;
+		}
+	document.getElementById(celID).innerHTML= beurt;
+		
+	}
+	var gelijkspel =false;
+		function bepaalGelijkSpel() {
+			console.log(aantalBeurten);
+			if (!winnaar && aantalBeurten==9) {
+				document.getElementById("winnaar").innerHTML= "Geen winnaar, probeer het anders opnieuw!"; 
+				gelijkspel= true;
+				
+			}
+			console.log(gelijkspel);
+	}
+	
+	
+		
+	function bepaalWinnaar(){
+	var 	veld1= document.getElementById("r1k1").innerHTML;
+	var 	veld2= document.getElementById("r1k2").innerHTML;
+	var 	veld3= document.getElementById("r1k3").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		}
+		veld1= document.getElementById("r2k1").innerHTML;
+		veld2= document.getElementById("r2k2").innerHTML;
+		veld3= document.getElementById("r2k3").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		}
+		veld1= document.getElementById("r3k1").innerHTML;
+		veld2= document.getElementById("r3k2").innerHTML;
+		veld3= document.getElementById("r3k3").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		} 
+		veld1= document.getElementById("r1k1").innerHTML;
+		veld2= document.getElementById("r2k2").innerHTML;
+		veld3= document.getElementById("r3k3").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		}
+		veld1= document.getElementById("r1k3").innerHTML;
+		veld2= document.getElementById("r2k2").innerHTML;
+		veld3= document.getElementById("r3k1").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		}
+		veld1= document.getElementById("r1k1").innerHTML;
+		veld2= document.getElementById("r2k1").innerHTML;
+		veld3= document.getElementById("r3k1").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		}
+		veld1= document.getElementById("r1k2").innerHTML;
+		veld2= document.getElementById("r2k2").innerHTML;
+		veld3= document.getElementById("r3k2").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		}
+		veld1= document.getElementById("r1k3").innerHTML;
+		veld2= document.getElementById("r2k3").innerHTML;
+		veld3= document.getElementById("r3k3").innerHTML;
+		if (veld1==beurt && veld2==beurt && veld3==beurt){
+			document.getElementById("winnaar").innerHTML= beurt + " heeft gewonnen";
+			winnaar = true;
+		}
+		
+	}
+</script>
+</html>
